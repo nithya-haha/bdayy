@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.cdnfonts.com/css/harry-potter" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happee Birthdae Gargi</title>
+  <style>
+    :root{
+      --glow1:#6ff;
+      --glow2:#9ef;
+      --ink:#e7f9ff;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Georgia, serif;
+      color: var(--ink);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      background: #0b0f14 url("./forbidden_forest.png") center/cover no-repeat fixed;
+    }
+
+    /* Fog overlay */
+    .fog, .fog:before, .fog:after{
+      position:fixed; inset:-20%;
+      background:
+        radial-gradient(60% 40% at 20% 30%, rgba(255,255,255,.05), transparent 60%),
+        radial-gradient(50% 35% at 80% 70%, rgba(255,255,255,.04), transparent 60%);
+      animation: fogShift 28s linear infinite;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+    .fog:before{ content:""; animation-duration:38s; animation-direction:reverse; opacity:.7; }
+    .fog:after{ content:""; animation-duration:46s; opacity:.5; }
+
+    @keyframes fogShift{
+      0%{ transform: translateX(-4%) translateY(0) }
+      50%{ transform: translateX(4%) translateY(-1%) }
+      100%{ transform: translateX(-4%) translateY(0) }
+    }
+
+    /* Stars */
+    .stars{ position:fixed; inset:0; pointer-events:none; }
+    .star{
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background:rgba(170,230,255,.9);
+      box-shadow:0 0 6px 2px rgba(130,220,255,.6);
+      animation: twinkle 4s ease-in-out infinite;
+      opacity:.0;
+    }
+    @keyframes twinkle{
+      0%,100%{ opacity:.0; transform:scale(.6) }
+      50%{ opacity:1; transform:scale(1) }
+    }
+
+    .card{
+      position:relative; z-index:2;
+      padding:32px 22px 28px;
+      background: rgba(5,12,18,.35);
+      border: 2px solid rgba(180,220,240,.35);
+      backdrop-filter: blur(6px);
+      width:min(780px, calc(100% - 32px));
+      border-radius:20px;
+      box-shadow: 0 0 25px rgba(0, 238, 255, .25);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(28px, 6vw, 64px);
+      letter-spacing:.5px;
+      font-family: 'Harry Potter', serif;  /* Harry Potter font */
+      text-shadow:
+        0 0 14px var(--glow1),
+        0 0 36px var(--glow2);
+      animation: titleGlow 2.4s ease-in-out infinite alternate;
+    }
+    @keyframes titleGlow{
+      from{ text-shadow:0 0 10px var(--glow1), 0 0 22px var(--glow2) }
+      to  { text-shadow:0 0 20px var(--glow1), 0 0 46px var(--glow2) }
+    }
+
+    p{
+      margin:0;
+      line-height:1.55;
+      font-size: clamp(16px, 2.3vw, 22px);
+      text-shadow: 0 0 10px rgba(255,255,255,.35);
+    }
+
+    /* Rickroll link */
+    .gift{
+      display:inline-block; margin-top:18px; font-weight:700;
+      padding:.2rem .5rem; border-radius:10px;
+      text-decoration:none; color:#bff3ff;
+      box-shadow: 0 0 12px rgba(140,240,255,.4);
+    }
+    .gift:hover{ color:white; box-shadow:0 0 18px rgba(140,240,255,.8) }
+
+    /* Patronus */
+    .patronus {
+  position: absolute;
+  left: 0px;   /* 👈 moved to left */
+  bottom: 40px;
+  width: 250px;
+  animation: appear 6s ease-in-out infinite;
+}
+ @keyframes appear{
+    0%   { opacity:0; transform:translateY(10px) scale(.9) }
+    25%  { opacity:1; transform:translateY(0) scale(1) }
+    75%  { opacity:1; transform:translateY(0) scale(1) }
+    100% { opacity:0; transform:translateY(10px) scale(.9) }
+  }
+
+  /* keep bottom text readable */
+    .fade-bottom{
+      position:fixed; inset:auto 0 0 0; height:120px; z-index:1;
+      background: linear-gradient(to top, rgba(11,15,20,.85), transparent);
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="fog"></div>
+  <div class="stars" id="stars"></div>
+
+  <div class="card">
+    <h1> Happee Birthdae Gargi </h1>
+    <p>Nobody be better than you for me, da.<br>I miss you and love you. 🩵</p>
+    <a class="gift" href="https://youtube.com/shorts/SXHMnicI6Pg?si=_xc7feuTPBILFzas" target="_blank" rel="noopener">
+ open ts gng (tap) </a>
+  </div>
+
+  <img class="patronus" src="./stag.png" alt="Stag Patronus">
+
+  <div class="fade-bottom"></div>
+
+  <script>
+    // sprinkle 70 twinkling stars at random spots
+    const wrap = document.getElementById('stars');
+    for(let i=0;i<70;i++){
+      const s=document.createElement('div');
+      s.className='star';
+      s.style.left = Math.random()*100+'%';
+      s.style.top  = Math.random()*80+'%';
+      s.style.animationDelay = (Math.random()*4)+'s';
+      s.style.transform = `scale(${0.6+Math.random()*0.8})`;
+      wrap.appendChild(s);
+    }
+  </script>
+</body>
+</html>
